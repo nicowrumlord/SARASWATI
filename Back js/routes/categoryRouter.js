@@ -4,7 +4,7 @@ const categoryController = require("../controllers/categoryController");
 const authMidd = require("../middleware/authMidd");
 
 //middleware acts for each operation to auth and register who is making requests
-//if middleware is not defined it wont work 
+
 router.get("/home", categoryController.getCategoryHOME)
 router.get("/", authMidd, categoryController.getCategory);
 router.get("/:id", authMidd, categoryController.getCategoryId);

@@ -14,9 +14,10 @@ export const HomeProductos = () => {
     const [productos, setProductos] = useState([]);
     
     const cargarProductos = async () => {
+
         const response = await crud.GET(`/api/products/${idCategoria}`);
         setProductos(response);
-        
+
     };
 
     console.log(productos);
@@ -29,8 +30,9 @@ export const HomeProductos = () => {
         <>
         <Header/>
             <div className=" md:flex md:min-h-screen">
-                <SideBar/>
-                    
+            
+                <SideBar/>    
+                
                     <div className="overflow-x-auto relative shadow-md sm:rounded-lg flex-1">
                         <div className="mt-10 flex justify-center bg-gradient-to-r text-sky-100 bg-clip-text font-display text-5xl tracking-tight text-transparent'">
                             <h1>
@@ -40,7 +42,7 @@ export const HomeProductos = () => {
                         <div className="p-10">
                         <Link 
                             to={`/crearProductos/${idCategoria}`}
-                            className= "bg-lime-400 mb-5 w-full py-3 uppercase font bold rounded">
+                            className= "bg-green-700  mb-5 w-full py-3 text-white uppercase font-bold rounded text-xl"> 
                                 Create Product
                             </Link>
                         </div>

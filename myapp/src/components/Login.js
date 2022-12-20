@@ -30,7 +30,7 @@ const Login = () => {
       password: usuario.password
     } 
     console.log(data);
-    //llamado alcrud post para enviar la informacion del hook
+    //llamado al crud post para enviar la informacion del hook
     const response = await crud.POST(`/api/auth`, data);
     const msg = response.msg;
    

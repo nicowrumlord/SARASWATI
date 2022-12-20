@@ -15,7 +15,7 @@ const ActualizarCategoria= () => {
     const [ categoria, setCategoria ] = useState({
         nombre:'',
         imagen:''
-    })
+    });
 
     const cargarCategoria = async () => {
         const response =  await crud.GET(`/api/categories/${idCategoria}`);
@@ -45,7 +45,7 @@ const ActualizarCategoria= () => {
 
         const response = await crud.PUT(`/api/categories/${idCategoria}`, data)
         console.log(response)
-        const mensaje = "la categoria se actualizo"
+        var mensaje = "Category updated"
         swal({
             title:'Info',
             text: mensaje,

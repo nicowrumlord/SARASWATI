@@ -4,9 +4,19 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 
+exports.getUsers = async (req, res) => {
+    try {
+        const user = await User.find();
+        res.json({user})
+    } catch (error) {
+        console.log("AN ERROR HAS OCCURRED usersController get : "+ error);
+    }
+}
+
+//post request 
 exports.createUser = async (req, res) => {
     const {password, email} = req.body; // variable created to extract the password from the body
-
+    
     try{
         //check that the user email is unique
         let user = await User.findOne({email});

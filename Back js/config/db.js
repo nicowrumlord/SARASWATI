@@ -1,9 +1,9 @@
 //connection to the database using mongoose orm 
 const mongoose = require("mongoose");
 
-const connectDB = async () => {
-    try{
-        const connection = await mongoose.connect(
+const connectDB = async () => { // create async arrow function 
+    try{   // connections are best inside try catch 
+        const connection = await mongoose.connect(  // connect function from mongoose use await to get response  , sends a json object{}   
             "mongodb+srv://root:TrQQp@cluster0.ovanuhp.mongodb.net/?retryWrites=true&w=majority",{
                 useNewUrlParser: true,
                 useUnifiedTopology: true,

@@ -5,7 +5,8 @@ const Category = require("../models/Category");
 exports.getCategoryHOME = async (req, res) => {
     try {
         const category = await Category.find();
-        res.json({category})
+        res.json({category});
+        
     } catch (error) {
         console.log("Error de Get" + error);
     }

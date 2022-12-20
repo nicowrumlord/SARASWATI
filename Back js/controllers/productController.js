@@ -1,5 +1,25 @@
 const Product = require("../models/Product");
 
+exports.getProductAll = async (req, res) => {
+    try {
+        const product = await Product.find();
+        res.json({product})
+        
+    } catch (error) {
+        console.log("Error de Get" + error);
+    }
+}
+
+exports.getProductId = async (req, res) => {
+    try {
+        const {id} = req.params
+        const product = await Product.findById(id);
+        res.json({product})
+        
+    } catch (error) {
+        console.log("Error de Get" + error);
+    }
+}
 
 exports.getProduct = async (req, res) => {
     const { id } = req.params
@@ -16,7 +36,7 @@ exports.createProduct = async (req, res) => {
         res.json(product);
 
     } catch (error) {
-        console.log("Error creando producto " + error);
+        console.log("Error creando producto" + error);
     }
 };
 
@@ -50,6 +70,7 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
     try {
         await Product.deleteOne({_id: req.params.id});
+        res.json({msg: "product deleted"})
     } catch (error) {
         console.log("Error deleting product: "+ error);
     }

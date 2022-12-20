@@ -66,7 +66,7 @@ const CrearCategoria = () => {
                     }
                 }
             });
-        navigate("/listaCategorias");
+        navigate(-1);
         
         }
     };

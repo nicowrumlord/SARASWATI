@@ -12,18 +12,18 @@ const ListaCategoria = () => {
 
     const cargarCategorias = async () => {
         const response = await crud.GET(`/api/categories`);
-        console.log(response)
+        console.log(response.category)
         setCategorias(response.category);
     }
-
+    
     useEffect(() => {
         cargarCategorias();
     }, []);
 
-    const borrarCategoria =  (e, idCategoria) => {
+    const borrarCategoria =  (e, idCategoria, nombre) => {
         e.preventDefault();
         swal({
-            title: "Confirm Delete category?",
+            title: "Confirm Delete category " + nombre + " ?",
             text: "Once deleted there's no backup",
             icon: "warning",
             buttons: true,
@@ -38,10 +38,10 @@ const ListaCategoria = () => {
         });
     }
 
-    const editCategory = (e, idCategoria) => {
+    const editCategory = (e, idCategoria, nombre) => {
         e.preventDefault();
         swal({
-            title: "Confirm update",
+            title: "Confirm update " + nombre + " ?",
             text: "Once updated there's no backup",
             icon: "warning",
             buttons: true,
@@ -90,30 +90,30 @@ const ListaCategoria = () => {
                                 {categoria1.map(item => (
                                    <tr >
                                    <td><img src={item.imagen} width="100" heigth="100"/></td>
-                                   <td>{item._id}</td>
-                                   <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.nombre}</td>
-                                   <td>{item.creado}</td>
-                                   <td>{item.creador}</td>
+                                   <td className="text-center">{item._id}</td>
+                                   <td scope="row" class="py-4 px-6 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.nombre}</td>
+                                   <td className="text-center">{item.creado}</td>
+                                   <td className="text-center">{item.creador}</td>
                                    <td>
                                       <input
                                         type="submit"
                                         value="Edit"
-                                        className="bg-slate-500 mb-5 w-full py-3 text-white uppercase font bold rounded"
-                                        onClick={(e) => editCategory(e, item._id) }
+                                        className="bg-slate-500 mb-5 w-full py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                        onClick={(e) => editCategory(e, item._id, item.nombre) }
                                       ></input>
                 
                                       <input
                                         type="submit"
                                         value="Delete"
-                                        className="bg-red-500 mb-5 w-full py-3 text-white uppercase font bold rounded"
-                                        onClick={(e) => borrarCategoria(e, item._id)}
+                                        className="bg-red-500 mb-5 w-full py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                        onClick={(e) => borrarCategoria(e, item._id, item.nombre)}
                                       ></input>
                                    </td>
                                    <td>
                                    <input
                                         type="submit"
                                         value="Create Product"
-                                        className="bg-green-800 mb-4 w-full py-2 text-white uppercase font bold rounded"
+                                        className="bg-green-700 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
                                         onClick={(e) => crearProductos(e, item._id)}
                                       ></input>
                                    </td>

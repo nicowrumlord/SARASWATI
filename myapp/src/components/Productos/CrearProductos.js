@@ -27,9 +27,27 @@ const CrearProductos = () => {
             ...producto,
             [data.target.name] : data.target.value
         })
-    }
+    };
 
     const ingresarProducto = async () => {
+        if (!nombre || !descripcion || !stock || !precio || !imagen) {
+            var mensaje = "Please Fill All Spaces"
+            swal({
+                title:'Error',
+                text: mensaje,
+                icon: 'error',
+                buttons:{
+                    confirm:{
+                        text: 'ok',
+                        value: true,
+                        visible:true,
+                        className: 'btn btn-danger',
+                        closeModal:true
+                    }
+                }
+            });
+            
+        }else {
         const data = {
             nombre: producto.nombre,
             descripcion: producto.descripcion,
@@ -37,14 +55,15 @@ const CrearProductos = () => {
             precio: producto.precio,
             imagen: producto.imagen,
             categoryId: idCategoria
-
+            
         };
 
         console.log(data)
-        const response = await crud.POST(`/api/products/`, data);
+        const response = await crud.POST(`/api/products/`, data);    //realizar condicionales if para creacion de producto 
         const msg = response.msg;
         console.log(msg);
-        var mensaje = "Producto Creado"
+
+        var mensaje = "Product Created"
         swal({
             title:'Info',
             text: mensaje,
@@ -59,6 +78,8 @@ const CrearProductos = () => {
                 }
             }
         });
+        navigate(-1);
+    }
         
     }
 
