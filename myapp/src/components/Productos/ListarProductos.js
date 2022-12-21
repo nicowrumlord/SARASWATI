@@ -1,38 +1,49 @@
 import { useEffect, useState } from "react";
 import crud from "../../conections/crud";
 import Header from "../Header";
+
 import SideBar from "../Sidebar";
 
 
 const ListarProductos = () => {
 
-    //cargar nombre de la categoria a la cual pertenece
-    /*
-    const [categoria, setCategorias] = useState([]);
-    const cargarNombreCategoria = async () => {
-        const response = await crud.GET(`/api/categories/${idCategoria}`);
-        setCategorias(response.product);
-        
-        const nameCategory =categoria.map(item => (item.nombre))
-        console.log(nameCategory)
-    }
-    */
-    
-
-    const [product, setProduct] = useState([]);
-
     //traer productos
+    const [product, setProduct] = useState([]);
     const cargarProductos = async () => {
-        const response = await crud.GET(`/api/products/`);
+        const response = await crud.GET(`/api/products`);
         console.log(response.product)
         setProduct(response.product);
     }
 
+    //traer nombre categoria
+    const [categorias, setCategorias] = useState([]);
+
+    const cargarCat = async () => {
+        const response = await await crud.GET(`/api/categories`);
+        setCategorias(response.category);
+        console.log(response.category);
+    }
+
+    const categorias_id = [];
+    const categoriasNombre = [];
+
+    categorias.map(item => (categorias_id.push(item._id)));
+    categorias.map(item => (categoriasNombre.push(item.nombre)));
     
+    console.log(categorias_id);
+    console.log(categoriasNombre);
+
+    function nameCategory (id) {
+        for (var i = 0;i < categorias_id.length; i++){
+            if (categorias_id[i] === id){
+                return categoriasNombre[i]
+            }
+        }
+    }
 
     useEffect(() => {
         cargarProductos();
-        //cargarNombreCategoria();
+        cargarCat();
     },[]);
 
 
@@ -71,7 +82,7 @@ const ListarProductos = () => {
                                    <td className="text-center">{item.descripcion}</td>
                                    <td className="text-center">{item.stock}</td>
                                    <td className="text-center">{item.precio}</td>
-                                   <td className="text-center">{item.categoryId}</td>
+                                   <td className="text-center">{nameCategory(item.categoryId)}</td>
                                    <td>
                                       
                                    </td>
